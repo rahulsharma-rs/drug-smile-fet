@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0", "pandas", "numpy",]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Drug SMILES Feature Extraction Tool"
+version = "1.0.0"
+authors = [
+  { name="Rahul Sharma", email="rahul_rs.sharma@hotmail.com" },
+]
+description = "This tool provides methods to extract meaningful features from drug SMILES for Machine Learning operation"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/rahulsharma-rs/drug-smile-fet"
+"Bug Tracker" = "https://github.com/rahulsharma-rs/drug-smile-fet/issues"
