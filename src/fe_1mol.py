@@ -25,7 +25,7 @@ two_char_mols = ['Cl', 'Br', 'He' , 'Li' , 'Be' , 'Ne' , 'Na' , 'Mg' ,
                  'Cf' , 'Es' , 'Fm' , 'Md' , 'No' , 'Lr' ,'se','as']
 
 # function to convert sequence strings into k-mer words, default size = 6 (hexamer words)
-def getKmers(sequence, size=6):
+def getKmers1(sequence, size=6):
     if sequence != None:
         lst = []
         X = None
@@ -45,6 +45,34 @@ def getKmers(sequence, size=6):
     else:
         return None
 
+def getKmers(sequence, size=6):
+    if sequence != None:
+        lst = []
+        X = None
+        i = 2
+        #for i in [2]:
+        x = 0
+        #for x in range(len(sequence) - i + 1):
+        while x in range(len(sequence) - i + 1):
+            if sequence[x:x + i] in two_char_mols:
+                lst.append(sequence[x:x + i])
+                x +=i
+            else:
+                for y in sequence[x:x + i]:
+                    try:
+
+                        X = Chem.MolFromSmiles(y)
+                        sio = sys.stderr = StringIO()
+                    except SyntaxError:
+                        pass
+                    if X is None:
+                        continue
+                    else:
+                        lst.append(y)
+                x += i
+        return lst
+    else:
+        return None
 
 def mapWords(lst=None,mdict=None):
 
@@ -161,6 +189,9 @@ def oneMolFeatureExtraction(trainSMILES=None,testSMILES=None,ngram_list =None):
         return trainSMILEdf, testSMILESdf, extracted_features, mol
     if df_1x is None:
         return trainSMILEdf, None, extracted_features, mol
+
+smile = 'N[C@](Br)(O)C'
+lst = getKmers1(smile)
 df = pd.read_csv('/Users/rahulsharma/Dropbox/UAB/drug-smile-fet/tests/SMILES_FeatureEngineered.csv')
 df = df[['DRUG_NAME', 'PUBCHEM_ID', 'SMILES']].copy(deep=True)
 
