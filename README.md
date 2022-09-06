@@ -1,3 +1,8 @@
+## Pre-requisites
+Install RdKit library:
+- instllation through [anaconda](https://anaconda.org/rdkit/rdkit)
+- instllation through [pip](https://pypi.org/project/rdkit-pypi/) 
+
 ## Usage
 
 - Make sure you have Python installed in your system.
