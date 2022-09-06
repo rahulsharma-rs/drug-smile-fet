@@ -190,6 +190,7 @@ def oneMolFeatureExtraction(trainSMILES=None,testSMILES=None,ngram_list =None):
     if df_1x is None:
         return trainSMILEdf, None, extracted_features, mol
 
+'''
 smile = 'N[C@](Br)(O)C'
 lst = getKmers1(smile)
 df = pd.read_csv('/Users/rahulsharma/Dropbox/UAB/drug-smile-fet/tests/SMILES_FeatureEngineered.csv')
@@ -201,3 +202,4 @@ df_1x.rename(columns={'Drug': 'DRUG_NAME', 'Cancer Type': 'TCGA_DESC'}, inplace=
 Train, Test, feature_sequences, feature_to_token_map = oneMolFeatureExtraction(trainSMILES=df, testSMILES=None,ngram_list=[1,2,3,4,5,6,7,8])
 
 print('x')
+'''
