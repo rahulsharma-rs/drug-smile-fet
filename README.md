@@ -38,3 +38,6 @@ The input to the method ```oneMolFeatureExtraction()``` must be a pandas DataFra
 - SMILES
 
 The column name should be in capital letters.
+
+### Cite us at:
+Rahul Sharma, & Jake Y. Chen. (2022). Drug SMILE Featture Extraction Tool (1.0.1). Zenodo. https://doi.org/10.5281/zenodo.7072304
