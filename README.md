@@ -39,7 +39,7 @@ result= fe_1mol.morganFingerPrint(train_smiles_df, nBits=1024)
 
 ```
 ### Note: 
-The input to the method ```oneMolFeatureExtraction() and morganFingerprints()``` must be a pandas DataFrame and the Drug SMILES column name must be in uppercase:
+The input to the method ```oneMolFeatureExtraction() and morganFingerPrint()``` must be a pandas DataFrame and the Drug SMILES column name must be in uppercase:
 - e.g., SMILES
 
 ### Cite us at:
