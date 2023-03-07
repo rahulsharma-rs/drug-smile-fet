@@ -29,15 +29,18 @@ train_smiles_df = pd.DataFrame(data=train_smiles)
 test_smile = train_smiles
 test_smile_df = pd.DataFrame(test_smile)
 
+#Example 1: to call NLP-based feature extraction method
 #Train, Test, feature_sequences, feature_to_token_map = fe_1mol.oneMolFeatureExtraction(trainSMILES=train_smiles_df, testSMILES=train_smiles_df,ngram_list=[1,2,3,4,5,6,7,8])
 Train, Test, feature_sequences, feature_to_token_map = fe_1mol.oneMolFeatureExtraction(trainSMILES=train_smiles_df, testSMILES=None,ngram_list=[1,2,3,4,5,6,7,8])
+
+#Example 2: to call Morgan Fingerprints based feature extraction method
+#nBits is the number of bits in the fingerprint
+result= fe_1mol.morganFingerprints(train_smiles_df, nBits=1024)
+
 ```
 ### Note: 
-The input to the method ```oneMolFeatureExtraction()``` must be a pandas DataFrame with atleats two columns:
-- DRUG_NAME
-- SMILES
-
-The column name should be in capital letters.
+The input to the method ```oneMolFeatureExtraction() and morganFingerprints()``` must be a pandas DataFrame and the Drug SMILES column name must be in uppercase:
+- e.g., SMILES
 
 ### Cite us at:
 Rahul Sharma, & Jake Y. Chen. (2022). Drug SMILE Feature Extraction Tool (1.0.3). Zenodo. [https://doi.org/10.5281/zenodo.7072304](https://doi.org/10.5281/zenodo.7072304)

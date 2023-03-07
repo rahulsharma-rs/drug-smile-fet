@@ -3,7 +3,7 @@ from sklearn.preprocessing import StandardScaler, MaxAbsScaler, MinMaxScaler, Qu
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from rdkit import Chem
-
+from rdkit.Chem import AllChem
 import pandas as pd
 import numpy as np
 
@@ -83,7 +83,24 @@ def mapWords(lst=None,mdict=None):
         return tlst
     else:
         return None
+"""
+The function oneMolFeatureExtraction takes three arguments, trainSMILES, testSMILES, and ngram_list.
 
+trainSMILES is a pandas DataFrame containing a column with SMILES strings that represent chemical structures. testSMILES is an optional argument that represents the same as trainSMILES, but for a separate set of test data.
+
+ngram_list is a list of integers that specifies the range of n-grams to use for feature extraction.
+
+The function performs the following operations:
+
+It generates a list of all unique single character molecules from the SMILES strings in trainSMILES, and creates aliases for each molecule.
+It creates a mapping between each single character molecule and its respective alias.
+It maps the SMILES strings in trainSMILES to sequences of their corresponding aliases.
+It performs feature extraction on the mapped sequences using a CountVectorizer, with n-gram sizes specified by the ngram_list argument.
+It performs z-transformation on the extracted features using the StandardScaler.
+It creates a new DataFrame containing the original trainSMILES DataFrame concatenated with the extracted features, and returns it.
+If testSMILES is not None, it performs the same operations on the testSMILES DataFrame and returns a new DataFrame containing the concatenated extracted features.
+In summary, this function takes a DataFrame with SMILES strings and performs feature extraction on them using a specified range of n-grams, returning a new DataFrame with the extracted features appended as additional columns. It also performs z-transformation on the extracted features for normalization. If test data is provided, it returns a separate DataFrame containing the extracted features for the test data. The function is useful for generating features for use in machine learning models that use chemical structures as input.
+"""
 def oneMolFeatureExtraction(trainSMILES=None,testSMILES=None,ngram_list =None):
 
     df = trainSMILES
@@ -190,16 +207,50 @@ def oneMolFeatureExtraction(trainSMILES=None,testSMILES=None,ngram_list =None):
     if df_1x is None:
         return trainSMILEdf, None, extracted_features, mol
 
+
+"""
+The function morganFingerPrint takes two arguments, data and nBits.
+
+data is a pandas DataFrame containing a column with SMILES strings that represent chemical structures.
+
+nBits is an integer that specifies the size of the fingerprint vector to be generated.
+
+The function iterates over each row of the data DataFrame, converts the SMILES string to a molecular object using the RDKit library, generates the Morgan fingerprint for the molecule using the GetMorganFingerprintAsBitVect function, and appends the fingerprint as a list to a list of fingerprints called lst.
+
+The list of fingerprints is then converted to a pandas DataFrame df, with each fingerprint being a row in the DataFrame. The column names of the DataFrame are labeled F1, F2, ..., FnBits, where nBits is the number of bits in the fingerprint vector.
+
+Finally, the original data DataFrame is concatenated with the new df DataFrame, and the resulting DataFrame is returned as the output of the function.
+
+In summary, this function takes a DataFrame with SMILES strings and generates Morgan fingerprints for each molecule, returning a new DataFrame with the fingerprints appended as additional columns.
+"""
+def morganFingerPrint(data=None, nBits=512):
+    #smile = 'N[C@](Br)(O)C'
+    nbts=nBits
+    lst = []
+    df = pd.DataFrame()
+    if data is None:
+        print('No data provided')
+        return None
+    else:
+        for index, row in data.iterrows():
+            ms = Chem.MolFromSmiles(row['SMILES'])
+            pairFps = AllChem.GetMorganFingerprintAsBitVect(ms,2,nBits=nbts)
+            lst.append(pairFps.ToList())
+        df = pd.DataFrame(lst)
+        df.columns = ['F'+str(x) for x in range(1,nbts+1)]
+        df = pd.concat([data.reset_index(), df], axis =1, ignore_index= False)
+    return df
 '''
 smile = 'N[C@](Br)(O)C'
 lst = getKmers1(smile)
-df = pd.read_csv('/Users/rahulsharma/Dropbox/UAB/drug-smile-fet/tests/SMILES_FeatureEngineered.csv')
+df = pd.read_csv('./tests/SMILES_FeatureEngineered.csv')
 df = df[['DRUG_NAME', 'PUBCHEM_ID', 'SMILES']].copy(deep=True)
 
-df_1x = pd.read_csv('/Users/rahulsharma/Dropbox/UAB/drug-smile-fet/tests/Drugs_for_repurposing.csv')
-df_1x.rename(columns={'Drug': 'DRUG_NAME', 'Cancer Type': 'TCGA_DESC'}, inplace=True)
+#df_1x = pd.read_csv('/Users/rahulsharma/Dropbox/UAB/drug-smile-fet/tests/Drugs_for_repurposing.csv')
+#df_1x.rename(columns={'Drug': 'DRUG_NAME', 'Cancer Type': 'TCGA_DESC'}, inplace=True)
 #Train, Test, feature_sequences, feature_to_token_map = oneMolFeatureExtraction(trainSMILES=df, testSMILES=df_1x,ngram_list=[1,2,3,4,5,6,7,8])
-Train, Test, feature_sequences, feature_to_token_map = oneMolFeatureExtraction(trainSMILES=df, testSMILES=None,ngram_list=[1,2,3,4,5,6,7,8])
-
+#Train, Test, feature_sequences, feature_to_token_map = oneMolFeatureExtraction(trainSMILES=df, testSMILES=None,ngram_list=[1,2,3,4,5,6,7,8])
+train = morganFingerPrint(data=df, nBits=512)
 print('x')
 '''
+
