@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='drug-smile-fet',
-    version='1.0.3',
+    version='1.0.4',
     packages=['dsfet'],
     url='https://github.com/rahulsharma-rs/drug-smile-fet',
     license='MIT',

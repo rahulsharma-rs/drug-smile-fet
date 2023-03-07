@@ -11,8 +11,8 @@ df_1x.rename(columns={'Drug': 'DRUG_NAME', 'Cancer Type': 'TCGA_DESC'}, inplace=
 #example of feature extraction from SMILES using NLP-based feature extraction method
 
 #Train, Test, feature_sequences, feature_to_token_map = oneMolFeatureExtraction(trainSMILES=df, testSMILES=df_1x,ngram_list=[1,2,3,4,5,6,7,8])
-Train, Test, feature_sequences, feature_to_token_map = fe_1mol.oneMolFeatureExtraction(trainSMILES=df, testSMILES=None,ngram_list=[1,2,3,4,5,6,7,8])
+#Train, Test, feature_sequences, feature_to_token_map = fe_1mol.oneMolFeatureExtraction(trainSMILES=df, testSMILES=None,ngram_list=[1,2,3,4,5,6,7,8])
 
 #example of feature extraction from SMILES using Morgan Fingerprints
-result= fe_1mol.morganFingerprints(df, nBits=1024)
+result= fe_1mol.morganFingerPrint(df, nBits=1024)
 print('x')

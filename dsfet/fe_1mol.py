@@ -157,9 +157,9 @@ def oneMolFeatureExtraction(trainSMILES=None,testSMILES=None,ngram_list =None):
         X = tf_transformer.transform(X)
         if df_1x is not None:
             X1 = tf_transformer.transform(X1)
-        count_vect_df = pd.DataFrame(X.todense(), columns=cv.get_feature_names())
+        count_vect_df = pd.DataFrame(X.todense(), columns=cv.vocabulary_.keys())
         if df_1x is not None:
-            count_vect_df1 = pd.DataFrame(X1.todense(), columns=cv.get_feature_names())
+            count_vect_df1 = pd.DataFrame(X1.todense(), columns=cv.vocabulary_.keys())
         if ctr ==0:
             ctr+=1
             dff = count_vect_df
@@ -243,7 +243,7 @@ def morganFingerPrint(data=None, nBits=512):
 '''
 smile = 'N[C@](Br)(O)C'
 lst = getKmers1(smile)
-df = pd.read_csv('./tests/SMILES_FeatureEngineered.csv')
+df = pd.read_csv('/Users/rahulsharma/Dropbox/UAB/drug-smile-fet/tests/Drugs_for_repurposing.csv')
 df = df[['DRUG_NAME', 'PUBCHEM_ID', 'SMILES']].copy(deep=True)
 
 #df_1x = pd.read_csv('/Users/rahulsharma/Dropbox/UAB/drug-smile-fet/tests/Drugs_for_repurposing.csv')

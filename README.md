@@ -35,7 +35,7 @@ Train, Test, feature_sequences, feature_to_token_map = fe_1mol.oneMolFeatureExtr
 
 #Example 2: to call Morgan Fingerprints based feature extraction method
 #nBits is the number of bits in the fingerprint
-result= fe_1mol.morganFingerprints(train_smiles_df, nBits=1024)
+result= fe_1mol.morganFingerPrint(train_smiles_df, nBits=1024)
 
 ```
 ### Note: 
