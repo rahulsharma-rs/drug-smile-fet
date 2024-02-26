@@ -43,4 +43,5 @@ The input to the method ```oneMolFeatureExtraction() and morganFingerPrint()``` 
 - e.g., SMILES
 
 ### Cite us at:
-Rahul Sharma, & Jake Y. Chen. (2022). Drug SMILE Feature Extraction Tool (1.0.3). Zenodo. [https://doi.org/10.5281/zenodo.7072304](https://doi.org/10.5281/zenodo.7072304)
+Rahul Sharma, Ehsan Saghapour, Jake Y. Chen, An NLP-based Technique to Extract Meaningful Features from Drug SMILES, iScience, 2024, 109127, ISSN 2589-0042, https://doi.org/10.1016/j.isci.2024.109127.
+(https://www.sciencedirect.com/science/article/pii/S2589004224003481)
