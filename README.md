@@ -45,3 +45,12 @@ The input to the method ```oneMolFeatureExtraction() and morganFingerPrint()``` 
 ### Cite us at:
 Rahul Sharma, Ehsan Saghapour, Jake Y. Chen, An NLP-based Technique to Extract Meaningful Features from Drug SMILES, iScience, 2024, 109127, ISSN 2589-0042, https://doi.org/10.1016/j.isci.2024.109127.
 (https://www.sciencedirect.com/science/article/pii/S2589004224003481)
+@article{sharma2024nlp,
+  title={An NLP-based Technique to Extract Meaningful Features from Drug SMILES},
+  author={Sharma, Rahul and Saghapour, Ehsan and Chen, Jake Y},
+  journal={iScience},
+  year={2024},
+  publisher={Elsevier}
+}
+
+
